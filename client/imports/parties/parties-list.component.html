@@ -1,0 +1,36 @@
+<div class="container">
+   
+    <div class="row">
+        <div class="col-md-3">
+           <login-buttons> </login-buttons>
+           
+        </div>
+        <div class="col-md-9">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th></th>    
+                    </tr>    
+                </thead> 
+                <tbody *ngIf="!loading">
+                     <tr *ngFor="let party of parties">
+                        <td><a [routerLink]= "['/party', party._id]">{{party.name}}</a></td>    
+                        <td>{{party.description}}</td>  
+                        <td>{{party.location}}</td>  
+                        <button class="btn btn-danger" (click)="removeParty(party)">Delete</button> 
+                    </tr>                    
+                </tbody>   
+            </table> 
+              
+            
+        </div>
+        <input type="text" #searchtext placeholder="Search by Location">
+        <button type="button" class="btn btn-default" (click)="search(searchtext.value)" >Search</button> 
+        <parties-form style="float: right"></parties-form>
+        
+        <pagination-controls (pageChange)="onPageChanged($event)" ></pagination-controls>
+    </div>    
+</div>
